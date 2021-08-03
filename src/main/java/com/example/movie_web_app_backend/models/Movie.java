@@ -10,16 +10,24 @@ public class Movie {
     private String id;
     private String title;
     private String description;
-    private String rating;
+    private String poster;
+    private String sPoster;
+    private Integer priceRent;
+    private Integer purchasePrice;
+    private String isFeaturedMovie;
 
     public Movie() {
     }
 
-    public Movie(String id, String title, String description, String rating) {
+    public Movie(String id, String title, String description, String poster, String sPoster, Integer priceRent, Integer purchasePrice, String isFeaturedMovie) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.rating = rating;
+        this.poster = poster;
+        this.sPoster = sPoster;
+        this.priceRent = priceRent;
+        this.purchasePrice = purchasePrice;
+        this.isFeaturedMovie = isFeaturedMovie;
     }
 
     public String getId() {
@@ -46,12 +54,44 @@ public class Movie {
         this.description = description;
     }
 
-    public String getRating() {
-        return rating;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getsPoster() {
+        return sPoster;
+    }
+
+    public void setsPoster(String sPoster) {
+        this.sPoster = sPoster;
+    }
+
+    public Integer getPriceRent() {
+        return priceRent;
+    }
+
+    public void setPriceRent(Integer priceRent) {
+        this.priceRent = priceRent;
+    }
+
+    public Integer getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(Integer purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public String getIsFeaturedMovie() {
+        return isFeaturedMovie;
+    }
+
+    public void setIsFeaturedMovie(String isFeaturedMovie) {
+        this.isFeaturedMovie = isFeaturedMovie;
     }
 
     @Override
@@ -60,7 +100,11 @@ public class Movie {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", rating='" + rating + '\'' +
+                ", poster='" + poster + '\'' +
+                ", sPoster='" + sPoster + '\'' +
+                ", priceRent=" + priceRent +
+                ", purchasePrice=" + purchasePrice +
+                ", isFeaturedMovie='" + isFeaturedMovie + '\'' +
                 '}';
     }
 }

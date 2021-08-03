@@ -19,24 +19,16 @@ public class MovieService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    public void insertIntoMovies(Movie movie) {
+        repository.insert(movie);
+    }
+
     public List<Movie> getMovies() {
         //validation
         //calculation
         //call your model
         //business logic
         return repository.findAll();
-    }
-
-    public List<Movie> getMoviesWithRating(String r) {
-        //business logic
-        Query query = new Query();
-        query.addCriteria(Criteria.where("rating").is(r));
-        List<Movie> movies = mongoTemplate.find(query, Movie.class);
-        return movies;
-    }
-
-    public void insertIntoMovies(Movie movie) {
-        repository.insert(movie);
     }
 
     public Optional<Movie> getAMovie(String id) throws Exception {
@@ -48,7 +40,45 @@ public class MovieService {
         return movie;
     }
 
+    public List<Movie> getFeaturedMovies(String f) {
+        //business logic
+        Query query = new Query();
+        query.addCriteria(Criteria.where("isFeaturedMovie").is(f));
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+        return movies;
+    }
+
+    public List<Movie> getTitleMovies(String f) {
+        //business logic
+        Query query = new Query();
+        query.addCriteria(Criteria.where("title").regex(f));
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+        return movies;
+    }
+
+
+    /*public List<Movie> getMoviesWithRating(String r) {
+        //business logic
+        Query query = new Query();
+        query.addCriteria(Criteria.where("rating").is(r));
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+        return movies;
+    }*/
+
+    /* Not Working
+    public Optional<Movie> deleteAMovie(String id) throws Exception {
+        Optional <Movie> movie = repository.findById(id);
+        if(!movie.isPresent()) { //movie is not present
+            throw new Exception("Movie with id " + id + " is not found");
+        }
+        return movie;
+    } */
+
     public void deleteAMovie(String id) {
         repository.deleteById(id);
+    }
+
+    public void updateAMovie(Movie movie) {
+        repository.save(movie);
     }
 }
