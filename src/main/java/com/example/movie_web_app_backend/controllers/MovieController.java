@@ -52,7 +52,7 @@ public class MovieController {
 
     @GetMapping("/movies/title")
     public ResponseEntity getTitleMovies(@RequestParam(value = "title") String f) {
-        var customizedResponse = new CustomizedResponse("A list of featured movies ", service.getTitleMovies(f));
+        var customizedResponse = new CustomizedResponse("A list of movies where title contains " + f, service.getTitleMovies(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 /* Not Working with a Message

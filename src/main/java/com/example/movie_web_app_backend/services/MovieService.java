@@ -51,19 +51,10 @@ public class MovieService {
     public List<Movie> getTitleMovies(String f) {
         //business logic
         Query query = new Query();
-        query.addCriteria(Criteria.where("title").regex(f));
         List<Movie> movies = mongoTemplate.find(query, Movie.class);
         return movies;
     }
 
-
-    /*public List<Movie> getMoviesWithRating(String r) {
-        //business logic
-        Query query = new Query();
-        query.addCriteria(Criteria.where("rating").is(r));
-        List<Movie> movies = mongoTemplate.find(query, Movie.class);
-        return movies;
-    }*/
 
     /* Not Working
     public Optional<Movie> deleteAMovie(String id) throws Exception {
