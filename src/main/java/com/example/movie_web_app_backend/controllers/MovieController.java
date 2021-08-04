@@ -36,7 +36,7 @@ public class MovieController {
     public ResponseEntity getAMovie(@PathVariable("id") String id) {
         CustomizedResponse customizedResponse = null;
         try {
-            customizedResponse = new CustomizedResponse("Movie with id " +id, Collections.singletonList((service.getAMovie(id))));
+            customizedResponse = new CustomizedResponse("Movie with id " +id, Collections.singletonList(service.getAMovie(id)));
         } catch (Exception e) {
             customizedResponse = new CustomizedResponse(e.getMessage(), null);
             return new ResponseEntity(customizedResponse, HttpStatus.NOT_FOUND);
@@ -55,20 +55,22 @@ public class MovieController {
         var customizedResponse = new CustomizedResponse("A list of movies where title contains " + f, service.getTitleMovies(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
-/* Not Working with a Message
-    @DeleteMapping("/movies/{id}")
+// Not Working with a Message
+/*    @DeleteMapping("/movies/{id}")
     public ResponseEntity deleteAMovie(@PathVariable("id") String id) {
         CustomizedResponse customizedResponse = null;
         try {
-            customizedResponse = new CustomizedResponse("Movie id with "+ id+ " has been deleted", Collections.singletonList((service.deleteAMovie(id))));
+            customizedResponse = new CustomizedResponse("Movie id with "+ id + " has been deleted", Collections.singletonList(service.deleteAMovie(id)));
+            return new ResponseEntity(customizedResponse, HttpStatus.OK);
         }
         catch(Exception e) {
             customizedResponse = new CustomizedResponse(e.getMessage(), null);
             return new ResponseEntity(customizedResponse, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(customizedResponse, HttpStatus.OK);
-    }
-*/
+        //return new ResponseEntity(customizedResponse, HttpStatus.OK);
+    }*/
+
+    // Working
     @DeleteMapping("/movies/{id}")
     public ResponseEntity deleteAMovie(@PathVariable("id") String id) {
         service.deleteAMovie(id);

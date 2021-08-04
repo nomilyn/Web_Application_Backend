@@ -61,7 +61,7 @@ public class TVShowService {
         }
         return tvShow;
     } */
-
+//Working
     public void deleteATVShow(String id) {
         repositoryTV.deleteById(id);
     }

@@ -55,16 +55,15 @@ public class MovieService {
         return movies;
     }
 
-
-    /* Not Working
-    public Optional<Movie> deleteAMovie(String id) throws Exception {
+    // Not Working
+    /*public Optional<Movie> deleteAMovie(String id) throws Exception {
         Optional <Movie> movie = repository.findById(id);
         if(!movie.isPresent()) { //movie is not present
             throw new Exception("Movie with id " + id + " is not found");
         }
         return movie;
-    } */
-
+    }*/
+//Working
     public void deleteAMovie(String id) {
         repository.deleteById(id);
     }
