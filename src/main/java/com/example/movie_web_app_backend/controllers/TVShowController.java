@@ -1,6 +1,7 @@
 package com.example.movie_web_app_backend.controllers;
 
 import com.example.movie_web_app_backend.CustomizedResponse;
+import com.example.movie_web_app_backend.models.Movie;
 import com.example.movie_web_app_backend.models.TVShow;
 import com.example.movie_web_app_backend.services.TVShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +17,30 @@ import java.util.List;
 @RestController
 public class TVShowController {
     @Autowired
-    private TVShowService serviceTV;
+    private TVShowService service;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/tvshows", consumes = { //consume -> sending data to the body of the request
             MediaType.APPLICATION_JSON_VALUE
     })
     public ResponseEntity addTVShow(@RequestBody TVShow tvShow) {
-        serviceTV.insertIntoTVShows(tvShow);
+        service.insertIntoTVShows(tvShow);
         return new ResponseEntity(tvShow, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows")
     public ResponseEntity gettvshows() {
-        var customizedResponse = new CustomizedResponse("A list of TV Shows", serviceTV.getTVShows());
+        var customizedResponse = new CustomizedResponse("A list of TV Shows", service.getTVShows());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/{id}")
     public ResponseEntity getATVShow(@PathVariable("id") String id) {
         CustomizedResponse customizedResponse = null;
         try {
-            customizedResponse = new CustomizedResponse("TV Show with id " +id, Collections.singletonList((serviceTV.getATVShow(id))));
+            customizedResponse = new CustomizedResponse("TV Show with id " +id, Collections.singletonList((service.getATVShow(id))));
         } catch (Exception e) {
             customizedResponse = new CustomizedResponse(e.getMessage(), null);
             return new ResponseEntity(customizedResponse, HttpStatus.NOT_FOUND);
@@ -44,15 +48,17 @@ public class TVShowController {
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/isFeaturedTVShow")
     public ResponseEntity getFeaturedTVShows(@RequestParam(value = "featured") String f) {
-        var customizedResponse = new CustomizedResponse("A list of featured TV shows ", serviceTV.getFeaturedTVShows(f));
+        var customizedResponse = new CustomizedResponse("A list of featured TV shows ", service.getFeaturedTVShows(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/title")
     public ResponseEntity getTitleTVShows(@RequestParam(value = "title") String f) {
-        var customizedResponse = new CustomizedResponse("A list of TV Shows where title contains " + f, serviceTV.getTitleTVShows(f));
+        var customizedResponse = new CustomizedResponse("A list of TV Shows where title contains " + f, service.getTitleTVShows(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
     /* Not Working with a Message
@@ -69,15 +75,19 @@ public class TVShowController {
             return new ResponseEntity(customizedResponse, HttpStatus.OK);
         }
     */
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/tvshows/{id}")
     public ResponseEntity deleteATVShow(@PathVariable("id") String id) {
-        serviceTV.deleteATVShow(id);
+        service.deleteATVShow(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/tvshows/{id}")
-    public ResponseEntity updateATVShow(@RequestBody TVShow tvShow) {
-        serviceTV.updateATVShow(tvShow);
-        return new ResponseEntity(HttpStatus.OK);
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(value = "/tvshows/{id}",consumes = { //consume -> sending data to the body of the request
+            MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity editATVShow(@PathVariable("id") String id, @RequestBody TVShow newTVShow) {
+        var customizedResponse = new CustomizedResponse(" TV Show with ID: " + id + " was updated successfully " , Collections.singletonList(service.editATVShow(id, newTVShow)));
+        return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 }

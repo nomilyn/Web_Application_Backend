@@ -18,6 +18,7 @@ public class MovieController {
     @Autowired
     private MovieService service;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/movies", consumes = { //consume -> sending data to the body of the request
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -26,12 +27,14 @@ public class MovieController {
         return new ResponseEntity(movie, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/movies")
     public ResponseEntity getmovies() {
         var customizedResponse = new CustomizedResponse("A list of movies", service.getMovies());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/movies/{id}")
     public ResponseEntity getAMovie(@PathVariable("id") String id) {
         CustomizedResponse customizedResponse = null;
@@ -44,12 +47,14 @@ public class MovieController {
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/movies/isFeaturedMovie")
     public ResponseEntity getFeaturedMovies(@RequestParam(value = "featured") String f) {
         var customizedResponse = new CustomizedResponse("A list of featured movies ", service.getFeaturedMovies(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/movies/title")
     public ResponseEntity getTitleMovies(@RequestParam(value = "title") String f) {
         var customizedResponse = new CustomizedResponse("A list of movies where title contains " + f, service.getTitleMovies(f));
@@ -71,15 +76,19 @@ public class MovieController {
     }*/
 
     // Working
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/movies/{id}")
     public ResponseEntity deleteAMovie(@PathVariable("id") String id) {
         service.deleteAMovie(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/movies/{id}")
-    public ResponseEntity updateAMovie(@RequestBody Movie movie) {
-        service.updateAMovie(movie);
-        return new ResponseEntity(HttpStatus.OK);
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(value = "/movies/{id}",consumes = { //consume -> sending data to the body of the request
+            MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity editAMovie(@PathVariable("id") String id, @RequestBody Movie newMovie) {
+        var customizedResponse = new CustomizedResponse(" Movie with ID: " + id + " was updated successfully " , Collections.singletonList(service.editAMovie(id, newMovie)));
+        return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 }

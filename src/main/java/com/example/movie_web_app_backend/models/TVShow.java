@@ -12,14 +12,14 @@ public class TVShow {
     private String description;
     private String poster;
     private String sPoster;
-    private Integer priceRent;
-    private Integer purchasePrice;
+    private String priceRent;
+    private String purchasePrice;
     private String isFeaturedTVShow;
 
     public TVShow() {
     }
 
-    public TVShow(String id, String title, String description, String poster, String sPoster, Integer priceRent, Integer purchasePrice, String isFeaturedTVShow) {
+    public TVShow(String id, String title, String description, String poster, String sPoster, String priceRent, String purchasePrice, String isFeaturedTVShow) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -70,19 +70,19 @@ public class TVShow {
         this.sPoster = sPoster;
     }
 
-    public Integer getPriceRent() {
+    public String getPriceRent() {
         return priceRent;
     }
 
-    public void setPriceRent(Integer priceRent) {
+    public void setPriceRent(String priceRent) {
         this.priceRent = priceRent;
     }
 
-    public Integer getPurchasePrice() {
+    public String getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(Integer purchasePrice) {
+    public void setPurchasePrice(String purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -102,8 +102,8 @@ public class TVShow {
                 ", description='" + description + '\'' +
                 ", poster='" + poster + '\'' +
                 ", sPoster='" + sPoster + '\'' +
-                ", priceRent=" + priceRent +
-                ", purchasePrice=" + purchasePrice +
+                ", priceRent='" + priceRent + '\'' +
+                ", purchasePrice='" + purchasePrice + '\'' +
                 ", isFeaturedTVShow='" + isFeaturedTVShow + '\'' +
                 '}';
     }

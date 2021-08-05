@@ -68,7 +68,23 @@ public class MovieService {
         repository.deleteById(id);
     }
 
-    public void updateAMovie(Movie movie) {
-        repository.save(movie);
+    public Movie editAMovie(String id, Movie newMovieData) {
+
+        //get the resource based on the id
+        Optional<Movie> movie = repository.findById(id);
+
+        //validation code to validate the id
+        movie.get().setTitle(newMovieData.getTitle());
+        movie.get().setDescription(newMovieData.getDescription());
+        movie.get().setPoster(newMovieData.getPoster());
+        movie.get().setsPoster(newMovieData.getsPoster());
+        movie.get().setPriceRent(newMovieData.getPriceRent());
+        movie.get().setPurchasePrice(newMovieData.getPurchasePrice());
+        movie.get().setIsFeaturedMovie(newMovieData.getIsFeaturedMovie());
+
+        //update the found resource with the new data
+        Movie updateMovie = repository.save(movie.get());
+
+        return updateMovie; //commit the update by saving it
     }
 }

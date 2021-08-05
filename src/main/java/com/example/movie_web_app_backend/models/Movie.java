@@ -12,14 +12,14 @@ public class Movie {
     private String description;
     private String poster;
     private String sPoster;
-    private Integer priceRent;
-    private Integer purchasePrice;
+    private String priceRent;
+    private String purchasePrice;
     private String isFeaturedMovie;
 
     public Movie() {
     }
 
-    public Movie(String id, String title, String description, String poster, String sPoster, Integer priceRent, Integer purchasePrice, String isFeaturedMovie) {
+    public Movie(String id, String title, String description, String poster, String sPoster, String priceRent, String purchasePrice, String isFeaturedMovie) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -70,19 +70,19 @@ public class Movie {
         this.sPoster = sPoster;
     }
 
-    public Integer getPriceRent() {
+    public String getPriceRent() {
         return priceRent;
     }
 
-    public void setPriceRent(Integer priceRent) {
+    public void setPriceRent(String priceRent) {
         this.priceRent = priceRent;
     }
 
-    public Integer getPurchasePrice() {
+    public String getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(Integer purchasePrice) {
+    public void setPurchasePrice(String purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -102,8 +102,8 @@ public class Movie {
                 ", description='" + description + '\'' +
                 ", poster='" + poster + '\'' +
                 ", sPoster='" + sPoster + '\'' +
-                ", priceRent=" + priceRent +
-                ", purchasePrice=" + purchasePrice +
+                ", priceRent='" + priceRent + '\'' +
+                ", purchasePrice='" + purchasePrice + '\'' +
                 ", isFeaturedMovie='" + isFeaturedMovie + '\'' +
                 '}';
     }
