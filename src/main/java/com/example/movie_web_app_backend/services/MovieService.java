@@ -24,10 +24,6 @@ public class MovieService {
     }
 
     public List<Movie> getMovies() {
-        //validation
-        //calculation
-        //call your model
-        //business logic
         return repository.findAll();
     }
 
@@ -51,6 +47,7 @@ public class MovieService {
     public List<Movie> getTitleMovies(String f) {
         //business logic
         Query query = new Query();
+        query.addCriteria(Criteria.where("title").regex(f));
         List<Movie> movies = mongoTemplate.find(query, Movie.class);
         return movies;
     }

@@ -1,7 +1,6 @@
 package com.example.movie_web_app_backend.controllers;
 
 import com.example.movie_web_app_backend.CustomizedResponse;
-import com.example.movie_web_app_backend.models.Movie;
 import com.example.movie_web_app_backend.models.TVShow;
 import com.example.movie_web_app_backend.services.TVShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class TVShowController {
     @Autowired
     private TVShowService service;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/tvshows", consumes = { //consume -> sending data to the body of the request
             MediaType.APPLICATION_JSON_VALUE
     })
@@ -28,14 +27,12 @@ public class TVShowController {
         return new ResponseEntity(tvShow, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows")
     public ResponseEntity gettvshows() {
         var customizedResponse = new CustomizedResponse("A list of TV Shows", service.getTVShows());
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/{id}")
     public ResponseEntity getATVShow(@PathVariable("id") String id) {
         CustomizedResponse customizedResponse = null;
@@ -48,14 +45,12 @@ public class TVShowController {
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/isFeaturedTVShow")
     public ResponseEntity getFeaturedTVShows(@RequestParam(value = "featured") String f) {
         var customizedResponse = new CustomizedResponse("A list of featured TV shows ", service.getFeaturedTVShows(f));
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/tvshows/title")
     public ResponseEntity getTitleTVShows(@RequestParam(value = "title") String f) {
         var customizedResponse = new CustomizedResponse("A list of TV Shows where title contains " + f, service.getTitleTVShows(f));
@@ -75,14 +70,13 @@ public class TVShowController {
             return new ResponseEntity(customizedResponse, HttpStatus.OK);
         }
     */
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @DeleteMapping("/tvshows/{id}")
     public ResponseEntity deleteATVShow(@PathVariable("id") String id) {
         service.deleteATVShow(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(value = "/tvshows/{id}",consumes = { //consume -> sending data to the body of the request
             MediaType.APPLICATION_JSON_VALUE
     })

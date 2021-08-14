@@ -5,16 +5,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends MongoRepository<UserModel, String> {
-    //this tells mongo that there needs to an implementation for this
-    UserModel findByUsername(String username);
+    // this tells mongo that there needs to be an implementation for this
+    //UserModel findByUsername(String username);
+    UserModel findByEmail(String email);
 }
 
-/*@Repository
-public interface UserRepository extends MongoRepository<UserModel, String>
-{
 
 
-    // this tells mongo that there needs to be an implementation for this
-    UserModel findByUsername(String username);
-
-}*/
